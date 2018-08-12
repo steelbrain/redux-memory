@@ -1,0 +1,28 @@
+{
+  "name": "redux-memory",
+  "version": "0.0.0",
+  "description": "Redux Persistence made simple",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "sb-babel-cli src -o lib",
+    "watch": "npm run build -- -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steelbrain/redux-memory.git"
+  },
+  "author": "steelbrain",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/steelbrain/redux-memory/issues"
+  },
+  "homepage": "https://github.com/steelbrain/redux-memory#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-steelbrain": "^5.0.3",
+    "eslint-config-steelbrain": "^5.0.2",
+    "flow-bin": "^0.78.0",
+    "sb-babel-cli": "0.1.x"
+  }
+}
