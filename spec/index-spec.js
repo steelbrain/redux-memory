@@ -59,6 +59,7 @@ test('basic stuff', async function(t) {
     },
   })
   store1.dispatch({ type: '_' })
+  t.is(reducerCalled, 2)
   t.not(sampleObjDehydrated, null)
 
   const store2 = await getReduxMemoryForTest({
@@ -75,6 +76,7 @@ test('basic stuff', async function(t) {
       return sampleObjDehydrated
     },
   })
+  t.is(reducerCalled, 3)
   t.deepEqual(store2.getState(), sampleObj)
 })
 
@@ -111,6 +113,7 @@ test('scope with stuff like ImmutableJS', async function(t) {
     },
   })
   store1.dispatch({ type: '_' })
+  t.is(reducerCalled, 2)
   t.not(sampleObjDehydrated, null)
 
   const store2 = await getReduxMemoryForTest({
@@ -128,5 +131,6 @@ test('scope with stuff like ImmutableJS', async function(t) {
       return sampleObjDehydrated
     },
   })
+  t.is(reducerCalled, 3)
   t.deepEqual(store2.getState(), sampleObj)
 })
