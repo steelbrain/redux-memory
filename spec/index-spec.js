@@ -2,7 +2,7 @@ import test from 'ava'
 import { Set, Map } from 'immutable'
 import { createStore } from 'redux'
 
-import getReduxMemory from '../'
+import { getReduxMemory } from '../'
 
 function noop(arg) {
   return arg
