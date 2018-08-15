@@ -28,16 +28,20 @@ After:
 
 ```js
 import { getReduxMemory, EngineLocalStorage } from 'redux-memory'
+import { Set as ImmSet, Map as ImmMap } from 'immutable'
+// ^ Uncommment for Immutable JS support
 import { createStore } from 'redux'
 import reducer from './reducers'
 
 async function main() {
   const store = getReduxMemory({
+    // scope: [ImmSet, ImmMap],
+    // ^ Uncomment for Immutable JS support
     storage: new EngineLocalStorage('my-local-storage-key'),
     reducer,
     createStore,
-    // Uncomment if you only want to persist session.* and user.id
     // keysToPersist: ['session', 'user.id'],
+    // ^ Uncomment if you only want to persist session.* and user.id
   })
   /// ... stuff
 }
