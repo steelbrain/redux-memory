@@ -3405,10 +3405,6 @@ path-type@^3.0.0:
   dependencies:
     pify "^3.0.0"
 
-php-serialize@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/php-serialize/-/php-serialize-2.0.0.tgz#01701fd187c2a1f5fc06e881fcdfaf3cf46032f1"
-
 pify@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
