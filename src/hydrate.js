@@ -39,7 +39,12 @@ function dehydrateItem(obj: Object, scope: Array<Function>) {
     throw new Error(`Unable to find '${type}' in given scope`)
   }
 
-  return new Creed(value)
+  const hydrated = new Creed(value)
+  // This is require for ImmutableJS::Record
+  if (typeof hydrated === 'function') {
+    return hydrated()
+  }
+  return hydrated
 }
 
 export default function hydrate(dehydrated: ?Object, scope: Array<Function>) {
