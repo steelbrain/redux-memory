@@ -39,7 +39,11 @@ async function reduxMemory({
     storage.save(stateToWrite)
   }
 
-  store.subscribe(_debounce(save, saveDebounce))
+  if (saveDebounce < 0) {
+    store.subscribe(save)
+  } else {
+    store.subscribe(_debounce(save, saveDebounce))
+  }
 
   return store
 }

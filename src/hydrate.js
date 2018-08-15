@@ -42,6 +42,10 @@ function dehydrateItem(obj: Object, scope: Array<Function>) {
   return new Creed(value)
 }
 
-export default function hydrate(dehydrated: Object, scope: Array<Function>) {
+export default function hydrate(dehydrated: ?Object, scope: Array<Function>) {
+  if (!dehydrated) {
+    return {}
+  }
+
   return dehydrateItem(dehydrated, scope)
 }
