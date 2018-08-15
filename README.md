@@ -28,7 +28,7 @@ After:
 
 ```js
 import { getReduxMemory, EngineLocalStorage } from 'redux-memory'
-import { Set as ImmSet, Map as ImmMap } from 'immutable'
+// import { Set as ImmSet, Map as ImmMap } from 'immutable'
 // ^ Uncommment for Immutable JS support
 import { createStore } from 'redux'
 import reducer from './reducers'
