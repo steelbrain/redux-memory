@@ -4,7 +4,7 @@
   "description": "Redux Persistence made simple",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ava spec/*-spec.js",
     "build": "sb-babel-cli src -o lib",
     "watch": "npm run build -- -w"
   },
@@ -19,10 +19,28 @@
   },
   "homepage": "https://github.com/steelbrain/redux-memory#readme",
   "devDependencies": {
+    "ava": "1.0.0-beta.7",
     "babel-core": "^6.26.3",
     "babel-preset-steelbrain": "^5.0.3",
     "eslint-config-steelbrain": "^5.0.2",
     "flow-bin": "^0.78.0",
+    "immutable": "^3.8.2",
+    "redux": "^4.0.0",
     "sb-babel-cli": "0.1.x"
+  },
+  "dependencies": {
+    "is-primitive": "^3.0.1",
+    "lodash": "^4",
+    "php-serialize": "^2.0.0"
+  },
+  "ava": {
+    "babel": {
+      "testOptions": {
+        "babelrc": false,
+        "presets": [
+          "module:ava/stage-4"
+        ]
+      }
+    }
   }
 }

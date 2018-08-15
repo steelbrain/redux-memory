@@ -10,6 +10,8 @@ WIP
 
 ```
 npm install --save redux-memory
+# or
+yarn add redux-memory
 ```
 
 ### License
