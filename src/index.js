@@ -5,8 +5,10 @@ import _debounce from 'lodash/debounce'
 
 import hydrate, { validateScope } from './hydrate'
 import dehydrate from './dehydrate'
+import EngineLocalStorage from './engine-local-storage'
+import EngineAsyncStorage from './engine-async-storage'
 
-async function reduxMemory({
+async function getReduxMemory({
   scope = [],
   storage,
   reducer,
@@ -48,4 +50,4 @@ async function reduxMemory({
   return store
 }
 
-export default reduxMemory
+export { getReduxMemory, EngineLocalStorage, EngineAsyncStorage }
