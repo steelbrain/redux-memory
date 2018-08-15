@@ -26,6 +26,6 @@ export default class EngineAsyncStorage {
       throw new Error('Unable to find react-native AsyncStorage')
     }
 
-    return JSON.parse(AsyncStorage.getItem(this.key) || 'null')
+    return JSON.parse((await AsyncStorage.getItem(this.key)) || 'null')
   }
 }
