@@ -30,7 +30,7 @@ function dehydrateItem(obj: Object, scope: Array<Function>) {
     })
   }
 
-  if (type === TYPE_AS_IS || type === 'Object') {
+  if (type === TYPE_AS_IS || type === 'Object' || type === 'Array') {
     return value
   }
 
