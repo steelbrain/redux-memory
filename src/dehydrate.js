@@ -22,12 +22,13 @@ function traverseAndCopy(chunks: Array<string>, src: Object, dest: any) {
       }
     } else {
       let jsValue = value
-      if (jsValue.toArray) {
+      const jsValueRef = value.toJS ? value.toJS() : value
+      if (Array.isArray(jsValueRef) && jsValue.toArray) {
         jsValue = jsValue.toArray()
       } else if (jsValue.toObject) {
         jsValue = jsValue.toObject()
-      } else if (jsValue.toJS) {
-        jsValue = jsValue.toJS()
+      } else {
+        jsValue = jsValueRef
       }
 
       item = {
