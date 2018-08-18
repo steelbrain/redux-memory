@@ -21,7 +21,15 @@ function traverseAndCopy(chunks: Array<string>, src: Object, dest: any) {
         value,
       }
     } else {
-      const jsValue = value.toJS ? value.toJS() : value
+      let jsValue = value
+      if (jsValue.toArray) {
+        jsValue = jsValue.toArray()
+      } else if (jsValue.toObject) {
+        jsValue = jsValue.toObject()
+      } else if (jsValue.toJS) {
+        jsValue = jsValue.toJS()
+      }
+
       item = {
         type: value.constructor.name,
         value: Array.isArray(jsValue) ? [] : {},

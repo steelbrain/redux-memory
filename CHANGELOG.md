@@ -1,3 +1,7 @@
+### 1.0.1
+
+- Fix for nested Immutable objects
+
 ### 1.0.0
 
 - Fix no await in AsyncStorage when resuming
