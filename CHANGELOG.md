@@ -1,3 +1,8 @@
+### 1.0.2
+
+- Exclude some files from npm package
+- Fix another bug with Immutable serialization
+
 ### 1.0.1
 
 - Fix for nested Immutable objects
