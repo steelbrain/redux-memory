@@ -15,14 +15,13 @@ function traverseAndCopy(serializeValue: Function, chunks: Array<string>, src: O
     }
 
     let item
-    if (isPrimitive(value)) {
+    const serializedValue = serializeValue(value)
+    if (isPrimitive(serializedValue)) {
       item = {
         type: TYPE_AS_IS,
-        value,
+        value: serializedValue,
       }
     } else {
-      const serializedValue = serializeValue(value)
-
       item = {
         type: value.constructor.name,
         value: Array.isArray(serializedValue) ? [] : {},
