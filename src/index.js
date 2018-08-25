@@ -3,25 +3,27 @@
 import invariant from 'assert'
 import _debounce from 'lodash/debounce'
 
-import hydrate, { validateScope } from './hydrate'
-import dehydrate from './dehydrate'
+import hydrate, { validateKnownTypes } from './hydrate'
+import dehydrate, { defaultSerializeValue } from './dehydrate'
 import EngineLocalStorage from './engine-local-storage'
 import EngineAsyncStorage from './engine-async-storage'
 
 async function getReduxMemory({
-  scope = [],
   storage,
   reducer,
   createStore,
   saveDebounce = 0,
+  knownTypes = [],
   keysToPersist = [],
+  serializeValue = defaultSerializeValue,
 }: {|
-  scope?: Array<Function>,
   storage: Object,
   reducer: Function,
   createStore: Function,
   saveDebounce?: number,
+  knownTypes?: Array<Function>,
   keysToPersist?: Array<string>,
+  serializeValue?: Function,
 |} = {}) {
   invariant(typeof reducer === 'function', 'option.reducer must be a function')
   invariant(typeof createStore === 'function', 'option.createStore must be a function')
@@ -30,14 +32,15 @@ async function getReduxMemory({
   invariant(typeof storage.load === 'function', 'options.storage.load must be a function')
   invariant(typeof saveDebounce === 'number' && Number.isFinite(saveDebounce), 'options.debounce must be a valid number')
   invariant(Array.isArray(keysToPersist), 'options.keysToPersist must be a valid Array')
-  validateScope(scope)
+  invariant(typeof serializeValue === 'function', 'options.serializeValue must be a valid function')
+  validateKnownTypes(knownTypes)
 
   const initialState = await storage.load()
-  const store = createStore(reducer, hydrate(initialState, scope))
+  const store = createStore(reducer, hydrate(initialState, knownTypes))
 
   function save() {
     const state = store.getState()
-    const stateToWrite = dehydrate(state, keysToPersist)
+    const stateToWrite = dehydrate(serializeValue, state, keysToPersist)
     storage.save(stateToWrite)
   }
 

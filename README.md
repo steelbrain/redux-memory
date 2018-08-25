@@ -35,13 +35,13 @@ import reducer from './reducers'
 
 async function main() {
   const store = getReduxMemory({
-    // scope: [ImmSet, ImmMap],
-    // ^ Uncomment for Immutable JS support
     storage: new EngineLocalStorage('my-local-storage-key'),
     reducer,
     createStore,
     // keysToPersist: ['session', 'user.id'],
     // ^ Uncomment if you only want to persist session.* and user.id
+    // knownTypes: [ImmSet, ImmMap],
+    // ^ Uncomment for Immutable JS support
   })
   /// ... stuff
 }
@@ -51,12 +51,13 @@ async function main() {
 
 ```js
 export async function getReduxMemory({
-  scope?: Array<Function> = [],
   storage: Object,
   reducer: Function,
   createStore: Function,
   saveDebounce?: number = 0,
   keysToPersist?: Array<string> = [],
+  knownTypes?: Array<Function> = [],
+  serializeValue?: (value: any) => any,
 })
 
 export class EngineAsyncStorage {
@@ -67,6 +68,10 @@ export class EngineLocalStorage {
   constructor(key: string)
 }
 ```
+
+### Notes
+
+- The value returned from `serializeValue` will be dehydrated by the original constructor from knownTypes.
 
 ### License
 

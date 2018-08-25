@@ -1,3 +1,8 @@
+### 2.0.0
+
+- Rename `scope` to `knownTypes`
+- Add `serializeValue` option
+
 ### 1.0.2
 
 - Exclude some files from npm package
