@@ -3,21 +3,21 @@
 import isPrimitive from 'is-primitive'
 import { TYPE_AS_IS } from './common'
 
-export function validateScope(scope: Array<Function>) {
+export function validateKnownTypes(knownTypes: Array<Function>) {
   const knownNames = new Set()
 
-  scope.forEach((item, index) => {
+  knownTypes.forEach((item, index) => {
     if (typeof item !== 'function') {
-      throw new Error(`options.scope[${index}] must be a function/class`)
+      throw new Error(`options.knownTypes[${index}] must be a function/class`)
     }
     if (knownNames.has(item.name)) {
-      throw new Error(`options.scope has encountered more than one occurance of '${item.name}'`)
+      throw new Error(`options.knownTypes has encountered more than one occurance of '${item.name}'`)
     }
     knownNames.add(item.name)
   })
 }
 
-function dehydrateItem(obj: Object, scope: Array<Function>) {
+function dehydrateItem(obj: Object, knownTypes: Array<Function>) {
   const { type, value: rawValue } = obj
 
   let value
@@ -26,7 +26,7 @@ function dehydrateItem(obj: Object, scope: Array<Function>) {
   } else {
     value = Array.isArray(rawValue) ? [] : {}
     Object.keys(rawValue).forEach(function(key) {
-      value[key] = dehydrateItem(rawValue[key], scope)
+      value[key] = dehydrateItem(rawValue[key], knownTypes)
     })
   }
 
@@ -34,9 +34,9 @@ function dehydrateItem(obj: Object, scope: Array<Function>) {
     return value
   }
 
-  const Creed = scope.find(i => i.name === type)
+  const Creed = knownTypes.find(i => i.name === type)
   if (!Creed) {
-    throw new Error(`Unable to find '${type}' in given scope`)
+    throw new Error(`Unable to find '${type}' in given knownTypes`)
   }
 
   const hydrated = new Creed(value)
@@ -47,10 +47,10 @@ function dehydrateItem(obj: Object, scope: Array<Function>) {
   return hydrated
 }
 
-export default function hydrate(dehydrated: ?Object, scope: Array<Function>) {
+export default function hydrate(dehydrated: ?Object, knownTypes: Array<Function>) {
   if (!dehydrated) {
     return {}
   }
 
-  return dehydrateItem(dehydrated, scope)
+  return dehydrateItem(dehydrated, knownTypes)
 }
